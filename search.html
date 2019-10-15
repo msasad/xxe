@@ -1,0 +1,33 @@
+<style>
+#results {
+  margin:20px;
+  border-top: 1px inset #aaa;
+  height: 300px;
+  padding: 10px;
+}
+</style>
+<form>
+  <label for="search"> Enter search term </label>
+  <input type="text" id="search" tabindex="0">
+  <button id="submit-btn">Submit</button>
+  <div id="results"></div>
+  <script>
+    (function() {
+      let input = document.querySelector('#search');
+      input.focus();
+      let btn = document.querySelector('#submit-btn');
+      btn.addEventListener('click', function(e) {
+        let val = input.value;
+        e.preventDefault();
+        fetch('index.php', {
+          method: 'POST',
+          body:`<search>${val}</search>`,
+        }).then(response =>  {
+          return response.text();
+        }).then(text => {
+          document.querySelector('#results').innerText = text;
+        });
+      });
+    })();
+  </script>
+</form>
