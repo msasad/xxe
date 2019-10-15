@@ -1,0 +1,43 @@
+%title: XML External Entities Vulnerability
+%author: Asad Siddiqui
+%date: 2019-10-16
+
+
+XML - Superset of HTML
+^
+Very popular for transferring data
+^
+> (before JSON)
+
+---
+
+-> Entities <-
+===
+
+-> *HTML Entities <-
+^
+*_Entity_                  _Replaced With_*
+^
+&nbsp;             single space character
+^
+&copy;                      ©
+^
+&amp;                       &
+^
+
+---
+
+-> *XML Entities <-
+^
+-> User Defined <-
+^
+```
+<!DOCTYPE foo [
+   <!ENTITY ename SYSTEM "file:///dev/random">
+]>
+```
+^
+
+```
+   <foo>&xxe;</foo>
+```
